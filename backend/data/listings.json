@@ -1,0 +1,25 @@
+[
+    {
+      "id": "1",
+      "title": "Cozy Beach House",
+      "type": "Entire home",
+      "guests": 4,
+      "bedrooms": 2,
+      "bathrooms": 1,
+      "price": 150,
+      "rating": 4.5,
+      "image": "pic1.jpg"
+    },
+    {
+      "id": "2",
+      "title": "Mountain Cabin",
+      "type": "Cabin",
+      "guests": 6,
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "price": 200,
+      "rating": 4.8,
+      "image": "pic2.jpg"
+    }
+  ]
+  
