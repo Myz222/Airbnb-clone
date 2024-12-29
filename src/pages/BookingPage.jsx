@@ -1,72 +1,63 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const BookingPage = () => {
-  const { id } = useParams();
-  const [listing, setListing] = useState(null);
-  const [checkIn, setCheckIn] = useState('');
-  const [checkOut, setCheckOut] = useState('');
-  const [totalPrice, setTotalPrice] = useState(0);
+  const { id } = useParams(); // Listing ID
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+  const [guests, setGuests] = useState('');
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    axios.get(`http://localhost:5000/api/listings/${id}`)
-      .then((response) => setListing(response.data))
-      .catch((error) => console.error('Error fetching listing details:', error));
-  }, [id]);
-
-  const calculateTotalPrice = () => {
-    if (!checkIn || !checkOut) return;
-
-    const checkInDate = new Date(checkIn);
-    const checkOutDate = new Date(checkOut);
-    const days = (checkOutDate - checkInDate) / (1000 * 60 * 60 * 24);
-
-    if (days > 0) {
-      setTotalPrice(days * listing.price);
-    } else {
-      setTotalPrice(0);
+  const handleBooking = async () => {
+    try {
+      const response = await axios.post('http://localhost:5000/api/bookings', {
+        property: id,
+        startDate,
+        endDate,
+        guests,
+      });
+      alert('Booking successful!');
+      navigate('/'); // Redirect to home after booking
+    } catch (error) {
+      console.error('Error creating booking:', error);
+      alert('Failed to book. Please try again.');
     }
   };
 
-  useEffect(() => {
-    if (listing) calculateTotalPrice();
-  }, [checkIn, checkOut, listing]);
-
-  if (!listing) {
-    return <div>Loading...</div>;
-  }
-
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold">Booking for {listing.title}</h1>
-      <p className="text-lg">Price per night: ${listing.price}</p>
-
+      <h1 className="text-2xl font-bold">Book Listing</h1>
       <div className="mt-4">
-        <label className="block">Check-in Date:</label>
+        <label className="block text-lg">Start Date</label>
         <input
           type="date"
-          value={checkIn}
-          onChange={(e) => setCheckIn(e.target.value)}
-          className="border p-2 rounded-md"
+          value={startDate}
+          onChange={(e) => setStartDate(e.target.value)}
+          className="border rounded-md p-2 w-full"
         />
       </div>
-
       <div className="mt-4">
-        <label className="block">Check-out Date:</label>
+        <label className="block text-lg">End Date</label>
         <input
           type="date"
-          value={checkOut}
-          onChange={(e) => setCheckOut(e.target.value)}
-          className="border p-2 rounded-md"
+          value={endDate}
+          onChange={(e) => setEndDate(e.target.value)}
+          className="border rounded-md p-2 w-full"
         />
       </div>
-
-      <p className="mt-4 text-lg">Total Price: ${totalPrice > 0 ? totalPrice : 'Invalid Dates'}</p>
-
+      <div className="mt-4">
+        <label className="block text-lg">Number of Guests</label>
+        <input
+          type="number"
+          value={guests}
+          onChange={(e) => setGuests(e.target.value)}
+          className="border rounded-md p-2 w-full"
+        />
+      </div>
       <button
-        className="mt-4 px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
-        onClick={() => alert('Booking confirmed!')}
+        onClick={handleBooking}
+        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
       >
         Confirm Booking
       </button>

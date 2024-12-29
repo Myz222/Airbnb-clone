@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 const ListingDetails = () => {
   const { id } = useParams();
   const [listing, setListing] = useState(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get(`http://localhost:5000/api/listings/${id}`)
@@ -19,20 +18,18 @@ const ListingDetails = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-3xl font-bold">{listing.title}</h1>
-      <img src={`/assets/${listing.image}`} alt={listing.title} className="w-full rounded-md my-4" />
-      <p className="text-lg">Type: {listing.type}</p>
-      <p className="text-lg">Guests: {listing.guests}</p>
-      <p className="text-lg">Bedrooms: {listing.bedrooms}</p>
-      <p className="text-lg">Bathrooms: {listing.bathrooms}</p>
-      <p className="text-lg">Price per night: ${listing.price}</p>
-      <p className="text-lg">Rating: {listing.rating}</p>
-      <button
-        onClick={() => navigate(`/book/${id}`)}
-        className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-      >
-        Book Now
-      </button>
+      <h1 className="text-3xl font-bold mb-4">{listing.title}</h1>
+      <img
+        src={require(`../assets/${listing.image}`).default}
+        alt={listing.title}
+        className="w-full h-72 object-cover rounded-md mb-4"
+      />
+      <p className="text-lg mb-2"><strong>Type:</strong> {listing.type}</p>
+      <p className="text-lg mb-2"><strong>Guests:</strong> {listing.guests}</p>
+      <p className="text-lg mb-2"><strong>Bedrooms:</strong> {listing.bedrooms}</p>
+      <p className="text-lg mb-2"><strong>Bathrooms:</strong> {listing.bathrooms}</p>
+      <p className="text-lg mb-2"><strong>Price per night:</strong> ${listing.price}</p>
+      <p className="text-lg mb-2"><strong>Description:</strong> {listing.description}</p>
     </div>
   );
 };

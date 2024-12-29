@@ -1,21 +1,34 @@
 import React from 'react';
-import image from '../assets/pic1.jpg';
+import pic1 from '../assets/pic1.jpg';
+import pic2 from '../assets/pic2.jpg';
+import pic3 from '../assets/pic3.jpg';
 
-const ListingCard = ({ title, type, guests, bedrooms, bathrooms, price, rating }) => {
+// Map image names to imports
+const images = {
+  pic1,
+  pic2,
+  pic3,
+};
+
+const ListingCard = ({ title, type, guests, bedrooms, bathrooms, price, image }) => {
   return (
-    <div className="bg-white shadow-md rounded-lg overflow-hidden">
-      <img src={image} alt={title} className="w-full h-48 object-cover" />
-      <div className="p-4">
-        <h3 className="text-lg font-bold">{title}</h3>
-        <p className="text-gray-600">{type}</p>
-        <p className="text-sm text-gray-500">{guests} guests · {bedrooms} bedrooms · {bathrooms} bathrooms</p>
-        <div className="flex justify-between items-center mt-2">
-          <span className="text-blue-500 font-bold">${price}/night</span>
-          <span className="text-gray-500">{rating} ★</span>
-        </div>
-      </div>
+    <div className="border rounded-md p-4 shadow-lg">
+      {image && (
+        <img
+          src={image}
+          alt={title}
+          className="w-full h-48 object-cover rounded-t-md mb-2"
+        />
+      )}
+      <h2 className="text-xl font-bold">{title}</h2>
+      <p>Type: {type}</p>
+      <p>Guests: {guests}</p>
+      <p>Bedrooms: {bedrooms}</p>
+      <p>Bathrooms: {bathrooms}</p>
+      <p>Price: ${price} / night</p>
     </div>
   );
 };
+
 
 export default ListingCard;
