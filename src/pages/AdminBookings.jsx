@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import api from '../api/api';
 const AdminBookings = () => {
     const [bookings, setBookings] = useState([]);
 
     useEffect(() => {
-        axios.get('http://localhost:5000/api/admin/bookings')
+        api.get('http://localhost:5000/api/admin/bookings')
             .then((response) => {
-                console.log('Fetched Bookings:', response.data); // Debug log
+                console.log('Fetched Bookings:', response.data); 
                 setBookings(response.data);
             })
             .catch((error) => console.error('Error fetching bookings:', error));
@@ -51,5 +51,4 @@ const AdminBookings = () => {
         </div>
     );
 };
-
 export default AdminBookings;

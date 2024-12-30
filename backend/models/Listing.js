@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-
 const listingSchema = new mongoose.Schema({
   title: { type: String, required: true },
   location: { type: String, required: true },
@@ -10,10 +9,7 @@ const listingSchema = new mongoose.Schema({
     ref: 'User',
     required: true,
   },
-  images: [String], // Array of image URLs
+  images: [String], 
 }, { timestamps: true });
-
-// Use an existing model if it exists, otherwise define it
 const Listing = mongoose.models.Listing || mongoose.model('Listing', listingSchema);
-
 module.exports = Listing;

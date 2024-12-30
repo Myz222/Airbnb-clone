@@ -7,6 +7,7 @@ import AdminListings from './pages/AdminListings';
 import AdminBookings from './pages/AdminBookings';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
+//import ProtectedRoute from './components/ProtectedRoute';
 function App() {
   return (
     <Router>
@@ -18,6 +19,8 @@ function App() {
         <Route path="/admin/bookings" element={<AdminBookings />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
+        {/* <Route path="/profile" element={<ProtectedRoute><Profile /></ProtectedRoute>} /> */}
+
       </Routes>
     </Router>
   );

@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-
+import api from '../api/api';
 const ListingDetails = () => {
   const { id } = useParams();
   const [listing, setListing] = useState(null);
-
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/listings/${id}`)
+    api.get(`http://localhost:5000/api/listings/${id}`)
       .then((response) => setListing(response.data))
       .catch((error) => console.error('Error fetching listing details:', error));
   }, [id]);

@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-
 const SearchBar = () => {
   const [location, setLocation] = useState('');
-
   return (
     <div className="bg-gray-100 p-4 rounded-lg flex items-center space-x-4">
       <input
@@ -18,5 +16,4 @@ const SearchBar = () => {
     </div>
   );
 };
-
 export default SearchBar;

@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-
+import api from '../api/api';
 const BookingPage = () => {
-  const { id } = useParams(); // Listing ID
+  const { id } = useParams(); 
   const [startDate, setStartDate] = useState('');
   const [endDate, setEndDate] = useState('');
   const [guests, setGuests] = useState('');
@@ -11,7 +11,7 @@ const BookingPage = () => {
 
   const handleBooking = async () => {
     try {
-      const response = await axios.post('http://localhost:5000/api/bookings', {
+      const response = await api.post('http://localhost:5000/api/bookings', {
         property: id,
         startDate,
         endDate,

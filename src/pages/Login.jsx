@@ -1,22 +1,25 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-
+import { useNavigate } from 'react-router-dom'; 
+import api from '../api/api';
 const Login = () => {
   const [formData, setFormData] = useState({ email: '', password: '' });
   const [message, setMessage] = useState('');
-
+  const navigate = useNavigate();  
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/login', formData);
-      setMessage(response.data.message);
+      console.log("Submitting login request with data:", formData);
+      const response = await api.post('/auth/login', formData);
+      localStorage.setItem('token', response.data.token);
+      setMessage('Login successful');
+      navigate('/');  // Redirect to homepage after successful login
     } catch (error) {
-      setMessage(error.response.data.error || 'Something went wrong');
+      console.error("Login Error:", error);
+      setMessage(error.response?.data?.error || 'Something went wrong');
     }
   };
 

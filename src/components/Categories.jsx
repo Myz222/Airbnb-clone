@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-
 const Categories = () => {
   const categories = ['Beachfront', 'Cabins', 'Trending', 'Luxury', 'Family Friendly'];
   const [activeCategory, setActiveCategory] = useState('');
-
   return (
     <div className="flex space-x-4 overflow-x-auto py-4">
       {categories.map((category) => (

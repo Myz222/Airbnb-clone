@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
-const Listing = require('./models/Listing'); // Adjust path as needed
-
+const Listing = require('./models/Listing'); 
 const listings = [
   {
     title: 'Cozy Cabin',

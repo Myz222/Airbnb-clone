@@ -2,14 +2,11 @@ import React from 'react';
 import pic1 from '../assets/pic1.jpg';
 import pic2 from '../assets/pic2.jpg';
 import pic3 from '../assets/pic3.jpg';
-
-// Map image names to imports
 const images = {
   pic1,
   pic2,
   pic3,
 };
-
 const ListingCard = ({ title, type, guests, bedrooms, bathrooms, price, image }) => {
   return (
     <div className="border rounded-md p-4 shadow-lg">
@@ -29,6 +26,5 @@ const ListingCard = ({ title, type, guests, bedrooms, bathrooms, price, image })
     </div>
   );
 };
-
 
 export default ListingCard;

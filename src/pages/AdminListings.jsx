@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import api from '../api/api';
 const AdminListings = () => {
   const [listings, setListings] = useState([]);
   const [formData, setFormData] = useState({
@@ -12,9 +12,8 @@ const AdminListings = () => {
     price: '',
     image: '',
   });
-
   useEffect(() => {
-    axios.get('http://localhost:5000/api/admin/listings')
+    api.get('http://localhost:5000/api/admin/listings')
       .then((response) => setListings(response.data))
       .catch((error) => console.error('Error fetching admin listings:', error));
   }, []);
@@ -25,7 +24,7 @@ const AdminListings = () => {
   };
 
   const handleAddListing = () => {
-    axios.post('http://localhost:5000/api/admin/listings', formData)
+    api.post('http://localhost:5000/api/admin/listings', formData)
       .then((response) => {
         setListings([...listings, response.data]);
         setFormData({ title: '', type: '', guests: '', bedrooms: '', bathrooms: '', price: '', image: '' });
@@ -34,7 +33,7 @@ const AdminListings = () => {
   };
 
   const handleDeleteListing = (id) => {
-    axios.delete(`http://localhost:5000/api/admin/listings/${id}`)
+    api.delete(`http://localhost:5000/api/admin/listings/${id}`)
       .then(() => setListings(listings.filter((listing) => listing._id !== id)))
       .catch((error) => console.error('Error deleting listing:', error));
   };

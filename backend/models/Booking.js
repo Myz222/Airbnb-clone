@@ -1,10 +1,9 @@
 const mongoose = require('mongoose');
-
 const bookingSchema = new mongoose.Schema({
   user: {
-    type: String, // Placeholder for now. Update to ObjectId with 'User' reference when auth is added.
+    type: mongoose.Schema.Types.ObjectId,  
+    ref: 'User',  
     required: true,
-    default: "GUEST_USER", // Default value to simulate a logged-in user.
   },
   property: {
     type: mongoose.Schema.Types.ObjectId,
